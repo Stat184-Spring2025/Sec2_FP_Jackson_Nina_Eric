@@ -17,6 +17,8 @@ Use this section to explain the structure of your repo. This should help visitor
 ## Data Sources and Acknowledgements
 
 Be sure to list where you got any data used within the project. Be sure to acknowledge any one whose work or elements you're drawing upon.
+Main data is contained here: https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina/tree/main
+taken from: https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results
 
 ## Authors
 
