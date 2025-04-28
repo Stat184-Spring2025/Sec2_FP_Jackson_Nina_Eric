@@ -37,3 +37,8 @@ age_sport_freq_df <- as.data.frame(age_sport_freq) %>%
 
 # Histogram for frequency of ages for Basketball
 basketball_freq <- age_sport_freq_df[age_sport_freq_df$Sport == 'Basketball',]
+
+
+# Frequency of ages by country
+age_country_freq <- table(athlete_events$NOC, athlete_events$Age)
+age_country_df <- as.data.frame(age_country_freq)
