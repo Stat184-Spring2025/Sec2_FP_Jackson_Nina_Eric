@@ -13,7 +13,7 @@ colnames(age_freq_df) <- c("Age", "Frequency")
 print(age_freq_df)
 
 # barplot for age in all data
-barplot(age_freq_table,
+total_ages_plot <- barplot(age_freq_table,
         main = "Frequency of Ages",
         xlab = "Age",
         ylab = "Frequency",
@@ -37,7 +37,14 @@ age_sport_freq_df <- as.data.frame(age_sport_freq) %>%
 
 # Histogram for frequency of ages for Basketball
 basketball_freq <- age_sport_freq_df[age_sport_freq_df$Sport == 'Basketball',]
-
+baskteball_barplot <- barplot(age_freq_table,
+                              main = "Frequency of Ages of Basketball Players",
+                              xlab = "Age",
+                              ylab = "Frequency",
+                              col = "skyblue",
+                              border = "white",
+                              las = 2,     # Rotate x-axis labels for better readability
+                              cex.names = 0.7)  # Shrink x-axis labels if too crowded
 
 # Frequency of ages by country
 age_country_freq <- table(athlete_events$NOC, athlete_events$Age)
