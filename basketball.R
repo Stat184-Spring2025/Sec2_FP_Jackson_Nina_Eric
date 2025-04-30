@@ -8,9 +8,12 @@ library(knitr)
 library(kableExtra)
 
 ## Olympic Dataset
-athletes <- read.csv("~/Downloads/athlete_events.csv") # Update path if needed
+url <- "https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina/resolve/main/athlete_events.csv"
+athletes <- read.csv(url)
 
 ## NBA Players R Dataset
+file_url <- "https://www.kaggle.com/datasets/drgilermo/nba-players-stats?resource=download"
+# Download file from URL above
 nba <- read.csv("~/Downloads/Stat184/Players.csv") # Update path if needed
 # Outdated but not for Olympic data
 # Only since 1950 but the gap between NBA players and 
@@ -236,6 +239,7 @@ ggplot(
     legend.position = "bottom"
   )
 
+## NBA Players in each medaling country
 nbaPerCountry %>%
   kable("html", caption = "<center>Olympic Basketball medalist countries and 
       how many NBA players have played for that country</center>",
