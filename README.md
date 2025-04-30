@@ -22,7 +22,7 @@ Be sure to list where you got any data used within the project. Be sure to ackno
 Main data is contained here: https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina/tree/main
 taken from: https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results
 
-Average heights and weights: https://www.worlddata.info/average-bodyheight.php
+NBA Players: https://www.kaggle.com/datasets/drgilermo/nba-players-stats?resource=download
 
 ## Authors
 
