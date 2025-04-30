@@ -16,13 +16,13 @@ ggplot(athlete_events, aes(x = Age)) +
 
 # Remove NA ages and limit age range (optional for readability)
 clean_data <- athlete_events %>%
-  filter(!is.na(Age), Age >= 10 & Age <= 60)
+  filter(!is.na(Age))
 
 
 # Count frequencies by Age and Year
 age_year_freq <- athlete_events %>%
   group_by(Year, Age) %>%
-  summarise(Freq = n(), .groups = 'drop')
+  summarise(Freq = log(n(),10), .groups = 'drop')
 
 # Plot heatmap
 ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
@@ -31,7 +31,7 @@ ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
   labs(title = "Heatmap of Athlete Ages Over Time",
        x = "Olympic Year",
        y = "Age",
-       fill = "Frequency") +
+       fill = "Frequency (log10)") +
   theme_minimal()
 
 # Compute mean age per Olympic year
