@@ -8,8 +8,10 @@ library(knitr)
 library(kableExtra)
 
 ## Olympic Dataset
-url <- "https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina/resolve/main/athlete_events.csv"
-athletes <- read.csv(url)
+athletes_url <- "https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina/resolve/main/athlete_events.csv"
+# Use this URL to download Athletes file
+
+athletes <- read.csv("~/Downloads/athlete_events.csv")
 
 ## NBA Players R Dataset
 file_url <- "https://www.kaggle.com/datasets/drgilermo/nba-players-stats?resource=download"
