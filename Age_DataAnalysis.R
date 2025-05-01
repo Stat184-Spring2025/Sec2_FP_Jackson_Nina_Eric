@@ -1,39 +1,52 @@
 # Import Libraries 
 library(tidyverse)
 library(ggplot2)
+library(dplyr)
 
-# create age frequency table ----
-age_freq_table <- table(athlete_events$Age)
+data <- athlete_events
 
-# Convert to data frame
-age_freq_df <- as.data.frame(age_freq_table)
-colnames(age_freq_df) <- c("Age", "Frequency")
+# Create a ggplot bar chart of Age frequency
+ggplot(athlete_events, aes(x = Age)) +
+  geom_bar(fill = "cornflowerblue", color = "white") +
+  labs(title = "Frequency Distribution of Age",
+       x = "Age",
+       y = "Number of Athletes") +
+  theme_minimal()
 
-# Print the data frame
-print(age_freq_df)
 
-# barplot for age in all data
-barplot(age_freq_table,
-        main = "Frequency of Ages",
-        xlab = "Age",
-        ylab = "Frequency",
-        col = "skyblue",
-        border = "white",
-        las = 2,     # Rotate x-axis labels for better readability
-        cex.names = 0.7)  # Shrink x-axis labels if too crowded
+# Remove NA ages and limit age range (optional for readability)
+clean_data <- athlete_events %>%
+  filter(!is.na(Age))
 
-# create table/df for ages frequency by sport ----
-age_sport_freq <- table(athlete_events$Sport, athlete_events$Age)
 
-# View the table
-print(age_sport_freq)
+# Count frequencies by Age and Year
+age_year_freq <- athlete_events %>%
+  group_by(Year, Age) %>%
+  summarise(Freq = log(n(),10), .groups = 'drop')
 
-# Convert the table to a data frame
-age_sport_freq_df <- as.data.frame(age_sport_freq) %>% 
-  rename(
-    Sport = Var1,
-    Age = Var2
-  )
+# Plot heatmap
+ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
+  geom_tile(color = "white") +
+  scale_fill_viridis_c(option = "C") +
+  labs(title = "Heatmap of Athlete Ages Over Time",
+       x = "Olympic Year",
+       y = "Age",
+       fill = "Frequency (log10)") +
+  theme_minimal()
 
-# Histogram for frequency of ages for Basketball
-basketball_freq <- age_sport_freq_df[age_sport_freq_df$Sport == 'Basketball',]
+# Compute mean age per Olympic year
+mean_age_by_year <- athlete_events %>%
+  filter(!is.na(Age)) %>%
+  group_by(Year) %>%
+  summarise(Mean_Age = mean(Age), .groups = 'drop')
+
+# Plot using ggplot2
+ggplot(mean_age_by_year, aes(x = Year, y = Mean_Age)) +
+  geom_line(color = "blue", size = 1.2) +
+  geom_point(color = "black") +
+  labs(title = "Mean Athlete Age Over Olympic Years",
+       x = "Year",
+       y = "Mean Age") +
+  theme_minimal(base_size = 14)
+
+
