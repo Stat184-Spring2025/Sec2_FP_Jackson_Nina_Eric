@@ -185,7 +185,7 @@ ggplot(
   scale_y_continuous(limits = c(0,25))
 
 ## How size affects medals won for athletes
-ggplot(
+male <- ggplot(
   data = maleBB_HandW,
   mapping = aes(
     x = avgHeight,
@@ -213,7 +213,7 @@ ggplot(
     legend.position = "bottom"
   )
 
-ggplot(
+female <- ggplot(
   data = femaleBB_HandW,
   mapping = aes(
     x = avgHeight,
@@ -240,6 +240,7 @@ ggplot(
     legend.title = element_text(face = "bold", size = 12, hjust = 0.5),
     legend.position = "bottom"
   )
+
 
 ## NBA Players in each medaling country
 nbaPerCountry %>%
