@@ -1,0 +1,34 @@
+---
+title: "Olympics Throughout History"
+author: "Jackson Gasperack, Nina Mesyngier, Eric Farrall"
+date: "May 7th, 2025"
+date-modified: now
+format: 
+  pdf:
+    number-sections: true
+    embed-resources: true
+    toc: true
+    geometry: margin = 1in
+    fig-cap-location: top
+appendix: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# Download Necessary Packages
+
+```{r}
+#| label: sec-packages
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(knitr)
+library(kableExtra)
+library(stringr)
+```
+
+You might need to install some of these packages if they aren't installed on your current machine already.
+
+
