@@ -1,0 +1,86 @@
+---
+title: "Olympics Throughout History"
+subtitle: "A Deeper Dive into the data\nof the Olympics"
+author: "Jackson Gasperack, Nina Mesyngier, Eric Farrall"
+date: "May. 2, 2025"
+date-modified: now
+format: 
+  pdf:
+    number-sections: true
+    embed-resources: true
+    toc: true
+    geometry: margin = 1in
+    fig-cap-location: top
+    appendix: true
+execute:
+  echo: true
+  warning: false
+  message: false
+csl: "/Users/jgasperack/Downloads/GitHubClones/finalProj/Sec2_FP_Jackson_Nina_Eric/apa7.csl"
+---
+
+# Introduction
+
+The Olympics has been the golden standard for athletes of all sports for the last 130 years. To be an Olympic athlete means you must literally be one of the best in the world at your event. The Olympics was very intriguing to us because there is a wide variety of sports and countries and we thought there could be a lot of underlying relationships within the Olympics data over the years.
+
+![](olympicsParis.png){fig-align="center" width="299"}
+
+## Dataset
+
+The data set we chose is a very large .csv file that we got from Kaggle. This file has more than 271,000 cases where a case represents an athlete that participated in an event in the given year. The data was recorded from the "First Olympics" in 1896 to the games in Rio de Janeiro in 2016.
+
+The variables in this data set include:\
+- **ID**: Unique ID for each name\
+- **Name**: Name of the athlete\
+- **Sex**: M or F\
+- **Age**: Age of the athlete in that Olympics\
+- **Height**: Height of the athlete in that Olympics\
+- **Weight**: Weight of the athlete in that Olympics\
+- **Team**: The country the athlete competed for\
+- **NOC**: The country's three letter identifier\
+- **Games**: The Olympics Name (e.g. 2016 Summer)\
+- **Year**: The year the games took place\
+- **Season**: The time of year the games took place\
+- **City**: The city in which the games took place\
+- **Sport**: The sport the athlete competed in\
+- **Event**: The event the athlete competed in\
+- **Medal**: The type of medal the athlete received (N/A if none)
+
+## Secondary Dataset
+
+The other data set we chose also come from Kaggle and it is a .csv file of all the players that were drafted into the NBA from 1950-2018. We needed this data set to compare the names of this draft list of almost 70 years to the list of Olympic athletes.
+
+The variables in this data set include:\
+- **ID**: Unique identifier for each player\
+- **Name**: Name of the player\
+- **Height**: The player's height at the time of the draft\
+- **Weight**: The player's weight at the time of the draft\
+- **College**: The college the player was drafted from\
+- **Year of Birth**: The year the player was born\
+- **Birth city and state**: The city and state where the player was born
+
+## Research Questions
+
+When exploring the data in the data frame we found that the summer and winter Olympics were not always in different year. In fact, they used to be played in the same year up until 1992. We also found that the United States has a lot of gold medalists, and speaking of medalists the youngest one recorded in this data set was just 10 years old! We also saw history in the data by seeing West, East and unified Germany, along with the Soviet Union and Russia being two different country entries as well. These findings in our exploratory data analysis lead to us forming our research questions.
+
+**Research Questions**:\
+1. How do various countries' participation in the Olympics change over time?\
+2. How does size (as measured in height and weight) affect the amount of medals that each athlete wins?\
+3. What are the changes in the age distributions of athletes through the years?
+
+# Download Necessary Packages
+
+Before we do any data wrangling or web scraping, we need to make sure all of our packages are loaded into R. We used the following packages to wrangle our date and plot our visualizations.
+
+```{r}
+#| label: sec-packages
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(knitr)
+library(kableExtra)
+library(stringr)
+```
+
+You might need to install some of these packages if they aren't installed on your current machine already.
+
