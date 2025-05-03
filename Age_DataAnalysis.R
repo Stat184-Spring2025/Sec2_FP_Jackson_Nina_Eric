@@ -25,7 +25,7 @@ age_year_freq <- athlete_events %>%
   summarise(Freq = log(n(),10), .groups = 'drop')
 
 # Plot heatmap
-<<<<<<< Updated upstream
+
 ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
   geom_tile(color = "white") +
   scale_fill_viridis_c(option = "C") +
@@ -34,7 +34,7 @@ ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
        y = "Age",
        fill = "Frequency (log10)") +
   theme_minimal()
-=======
+
 #ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
  # geom_tile(color = "white") +
   #scale_fill_viridis_c(option = "C") +
@@ -44,14 +44,14 @@ ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
      #  fill = "Frequency (log10)") +
   #theme_minimal()
 
-# 2D bar-like tile plot with log scale
+# tile plot with linear scale
 ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
   geom_tile(color = "grey90", width = 1, height = 1) +
   scale_fill_viridis_c( option = "D") +
-  labs(title = "2D Age Frequency Bar Tile Plot (Log Scale)",
+  labs(title = "Age Frequency Tile Plot (Linear Scale)",
        x = "Olympic Year",
        y = "Athlete Age",
-       fill = "Log(Freq)") +
+       fill = "Freq") +
   theme_minimal(base_size = 13) +
   theme(panel.grid = element_blank())
 

@@ -1,0 +1,102 @@
+---
+title: "Olympics Throughout History"
+author: "Jackson Gasperack, Nina Mesyngier, Eric Farrall"
+date: "May 7th, 2025"
+date-modified: now
+format: 
+  pdf:
+    number-sections: true
+    embed-resources: true
+    toc: true
+    geometry: margin = 1in
+    fig-cap-location: top
+appendix: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# Download Necessary Packages
+
+```{r}
+#| label: sec-packages
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(knitr)
+library(kableExtra)
+library(stringr)
+```
+
+You might need to install some of these packages if they aren't installed on your current machine already.
+
+
+# Analysis on Age of Athletes
+For the purpose of this section, the main attributes being focused on are Age and Year. The goal of this section is to explore if there are any trends in the frequency of the ages of athletes, or in the mean age of athletes. 
+```{r}
+#| label: wranglingForAgeAnalysis
+#| lst-label: lst-wranglingForAgeAnalysis
+#| lst-cap: "Basic Data Wrangling for Doing Age Analysis"
+#| eval: false
+# Remove NA ages and limit age range (optional for readability)
+clean_data <- athletes %>%
+  filter(!is.na(Age))
+
+# Count frequencies by Age and Year
+age_year_freq <- athletes %>%
+  group_by(Year, Age) %>%
+  summarise(Freq = log(n(),10), .groups = 'drop')
+
+# Compute mean age per Olympic year
+mean_age_by_year <- athletes %>%
+  filter(!is.na(Age)) %>%
+  group_by(Year) %>%
+  summarise(Mean_Age = mean(Age), .groups = 'drop')
+
+```
+
+After cleaning the data up a bit, it is time to make a couple of visualizations to see if there are any obvious trends or outliers in the data set.
+```{r}
+#| label: fig-meanAgePlot
+#| fig-cap: "Mean Age of Olympic Athletes Over Olympic Years"
+#| fig-pos: H
+#| fig-height: 5
+#| fig-alt: "Line graph showing the mean age of olympic athletes each olympic year"
+#| aria-describedby: meanAgePlotLD
+#| lst-label: lst-figure1
+#| lst-cap: "Code Chunk for Making a Mean Age Figure"
+
+# Plot using ggplot2
+ggplot(mean_age_by_year, aes(x = Year, y = Mean_Age)) +
+  geom_line(color = "blue", size = 1.2) +
+  geom_point(color = "black") +
+  labs(title = "Mean Athlete Age Over Olympic Years",
+       x = "Year",
+       y = "Mean Age") +
+  theme_minimal(base_size = 14)
+```
+This line graph shows the mean age of olympic athletes for a given year. As you can see, there was a big spike in the mean age between 1920 and 1950, as these were the years that Art Competitions were still a part of the olympics. We can also see that the lowest mean ages were around 1890 and 1980. Past 1980, the line increases until it begins to start leveling out jusr before 2010.  The closer together data points occur because of the olympic games beginning to alternate which years were a Summer Olympics and which years were a Winter Olympics, meaning that there is less data per year, but more detailed data.
+```{r}
+#| label: fig-ageFrequencyPlot
+#| fig-cap: "Frequency of Ages in Olympic Years"
+#| fig-pos: H
+#| fig-height: 5
+#| fig-alt: "Tile plot showing age frequency over years"
+#| aria-describedby: ageFrequencyPlotTD
+#| lst-label: lst-figure2
+#| lst-cap: "Code Chunk for Making Age Frequency Figure"
+
+# tile plot with linear scale
+ggplot(age_year_freq, aes(x = Year, y = Age, fill = Freq)) +
+  geom_tile(color = "grey90", width = 1, height = 1) +
+  scale_fill_viridis_c( option = "D") +
+  labs(title = "Age Frequency Tile Plot (Linear Scale)",
+       x = "Olympic Year",
+       y = "Athlete Age",
+       fill = "Freq") +
+  theme_minimal(base_size = 13) +
+  theme(panel.grid = element_blank())
+
+```
+This figure shows the outliers that cause the mean age to spike around 1920. There are a couple of athletes in their late 90s who competed in Art Competitions. While further analysis could be done on the athletes who specifically competed in Art Competitions, there was a significant amount of age data missing from this subset of the cases, meaning whatever analysis was done, would not be fully accurate. 
