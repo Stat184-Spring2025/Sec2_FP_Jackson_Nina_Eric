@@ -25,9 +25,11 @@ The Olympics has been the golden standard for athletes of all sports for the las
 
 ![](olympicsParis.png){fig-align="center" width="299"}
 
-## Dataset
+## Primary Dataset
 
 The data set we chose is a very large .csv file that we got from Kaggle. This file has more than 271,000 cases where a case represents an athlete that participated in an event in the given year. The data was recorded from the "First Olympics" in 1896 to the games in Rio de Janeiro in 2016.
+
+The person who created the data set goes by the username rgriffin on Kaggle and, according to her Kaggle profile, she is the lead data scientist at Boston Consulting Group X. Most of the data was taken from the website www.sports-reference.com which is a central hub of decades of information about most modern day sports. This includes player statistics, physical attributes, and accolades for most players in any sport within the last 125 years.
 
 The variables in this data set include:\
 - **ID**: Unique ID for each name\
@@ -46,9 +48,17 @@ The variables in this data set include:\
 - **Event**: The event the athlete competed in\
 - **Medal**: The type of medal the athlete received (N/A if none)
 
+### FAIR/CARE Principles
+
+In terms of the FAIR principles, we believe that this data set embodies each quality. This data set was one of the first ones that appeared when searching up Olympics on Kaggle making it very findable and downloading it was easy, the only struggle was the size of the data set so we made a hugging face link for easier accessibility. Each person in our group has a different machine, yet the data set worked on each one making it interoperable. Despite the size of the file, it was easy to do data analysis and the author even included a detailed report she did herself for reference making this data easily reusable.
+
+The CARE principles aren't as clear because their purposes focus more towards the creator of the data set than the actual data set itself. The principle of collective benefit is clear, because there is over 300 different data set notebooks on Kaggle that use this data set. We're not sure whether the creator has more permissions than us as people studying the data set, but she posted her wrangling/scraping code on GitHub and it seems to be read only unless you open the code in your own repository. The only principle that the creator might not have met is responsibility, because there are multiple little inconsistencies in the data set, according to the discussion, without any follow ups from the creator herself. Yet, this data set does seem to be ethical as she cited all of her sources and her code seems pretty unbiased.
+
 ## Secondary Dataset
 
-The other data set we chose also come from Kaggle and it is a .csv file of all the players that were drafted into the NBA from 1950-2018. We needed this data set to compare the names of this draft list of almost 70 years to the list of Olympic athletes.
+The other data set we chose also come from Kaggle and it is a .csv file of all the players that were drafted into the NBA from 1950-2018. We needed this data set to compare the names of this draft list of almost 70 years to the list of Olympic athletes. This data set also included .csv files of each player's position info and each player's season performance for a given year and team. Yet, those data sets were unnecessary to include because we only needed the names of the players.
+
+The person who created this data set is Omri Goldstein who, according to his LinkedIn found on Kaggle, is a data scientist at Google. All of the data was scraped and wrangled from www.basketball-reference.com which is just a basketball focused version of the previously mentioned "sports-reference".
 
 The variables in this data set include:\
 - **ID**: Unique identifier for each player\
@@ -59,6 +69,12 @@ The variables in this data set include:\
 - **Year of Birth**: The year the player was born\
 - **Birth city and state**: The city and state where the player was born
 
+### FAIR/CARE Principles
+
+We believe that this data set also follows the principles of FAIR, as the data set was easily findable on Kaggle when we searched up the phrase NBA. This data was also easily accessible since the data set wasn't particularly large and it easily downloaded onto each group member's machine, making it interoperable. Finally, we thought this data was reusable because the .csv files which includes all player statistics for each season since 1950 has 53 different variables which easily allows for many different conclusions to be drawn.
+
+We believe that this data set does not properly follow the principles of CARE. About 100 different data set notebooks were made on Kaggle from this data set and many of the discussion comments share their findings with others, which does follow the collective benefit principle. However, the creator of this data set did not share the code used to scrape and wrangle the data, which we believe is an abuse of authority to control giving the creator too many permissions compared to those studying. However, this creator did take responsibility as he is seen replying to most comments that bring up inconsistencies in the data set. We also believe that he followed the ethics principle as he cited his sources and got his data from an unbiased source.
+
 ## Research Questions
 
 When exploring the data in the data frame we found that the summer and winter Olympics were not always in different year. In fact, they used to be played in the same year up until 1992. We also found that the United States has a lot of gold medalists, and speaking of medalists the youngest one recorded in this data set was just 10 years old! We also saw history in the data by seeing West, East and unified Germany, along with the Soviet Union and Russia being two different country entries as well. These findings in our exploratory data analysis lead to us forming our research questions.
@@ -68,7 +84,7 @@ When exploring the data in the data frame we found that the summer and winter Ol
 2. How does size (as measured in height and weight) affect the amount of medals that each athlete wins?\
 3. What are the changes in the age distributions of athletes through the years?
 
-# Download Necessary Packages
+## Download Necessary Packages
 
 Before we do any data wrangling or web scraping, we need to make sure all of our packages are loaded into R. We used the following packages to wrangle our date and plot our visualizations.
 
@@ -84,3 +100,111 @@ library(stringr)
 
 You might need to install some of these packages if they aren't installed on your current machine already.
 
+## Load the Data into R
+
+```{r}
+#| label: loadData
+
+## Olympic Dataset
+url <- "https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina
+/resolve/main/athlete_events.csv"
+# Download file from URL above
+athletes <- read.csv("~/Downloads/athlete_events.csv")
+
+## NBA Players R Dataset
+file_url <- "https://www.kaggle.com/datasets/drgilermo/
+nba-players-stats?resource=download"
+# Download file from URL above
+nba <- read.csv("~/Downloads/Stat184/Players.csv") # Update path if needed
+```
+
+In order to download either .csv file, use the links provided to download each data set and then update each path to where the files are stored on your machine.
+
+# The Dominance of the United States
+
+It is no secret that the United States is a heavy favorite to win the Olympic Games in total medal count every year. With fan favorite athletes like Michael Phelps, Simone Biles, and LeBron James, it's hard not to root for them. However, when we thought more about it, we started wondering what the U.S. was doing to be so far ahead of its competition.  
+
+We knew that it wasn't population, even though having more people in your country to choose from definitely helps, we are far better than countries like India and China in terms of total medals won. So, then we thought that size would be a good indicator of an athlete's success. This is where our research question about size predicting medals came from. We also wanted to focus on a singular sport to improve graph readability while also keeping in mind Kosslyn's Principle of Capacity Limitations. In our opinion, the sport where size, in terms of height, matters the most is basketball.  
+
+```{r}
+#| label: athletesBB
+#| include: false
+
+## All BB Athletes
+basketball <- athletes %>%
+  filter((`Sport` == "Basketball"))
+
+## All Male BB Athletes
+basketballMale <- basketball %>%
+  filter(`Sex` == "M")
+
+## All Female BB Athletes
+basketballFemale <- basketball %>%
+  filter(`Sex` == "F")
+```
+
+```{r}
+#| label: countryMedalists
+#| include: false
+
+## Countries who've medaled in basketball
+countryMedalists <- basketball %>%
+  distinct(`Team`,`Year`,`Medal`) %>%
+  group_by(`Team`) %>%
+  summarise(
+    goldWon = sum(`Medal` == "Gold", na.rm = TRUE),
+    silverWon = sum(`Medal` == "Silver", na.rm = TRUE),
+    bronzeWon = sum(`Medal` == "Bronze", na.rm = TRUE),
+    total = sum(!is.na(`Medal`)),
+    .groups = "drop"
+  ) %>%
+  filter(!(`Team` == "Unified Team")) %>% # Unified Team removed as it is not
+# a real country but a combination of several
+  filter(!(`total` == 0)) 
+
+## Case is now Team and Medal type for Data Vis.
+medalsPerBBTeam <- countryMedalists %>%
+  pivot_longer(cols = c(goldWon,silverWon,bronzeWon),
+               names_to = "Medal",
+               values_to = "Count") %>%
+  mutate(`Medal` = case_when(
+    Medal == "goldWon" ~ "Gold", # Changing names of variables to medals
+    Medal == "silverWon" ~ "Silver",
+    Medal == "bronzeWon" ~ "Bronze"
+  )) %>%
+  mutate(Medal = factor(Medal, levels = c("Gold","Silver","Bronze")))
+  # Changing order of medal types for better graph visuals
+```
+
+```{r}
+#| label: fig-countryBBDataVis
+#| echo: false
+#| fig-cap: "Country Basketball Medalists"
+
+## Medals for each country
+ggplot(
+  data = medalsPerBBTeam,
+  mapping = aes(x = reorder(`Team`,-Count), y = `Count`, fill = `Medal`)
+  # Order the bars by count
+  ) +
+  geom_bar(stat = "identity", position = "stack") + # Stacking diff. groups
+  labs(
+    title = "Frequency of Basketball Medals Won by Country",
+    x = "Country",
+    y = "Medals Won"
+  ) +
+  scale_fill_manual(values = c("Gold" = "gold","Silver" = "gray","Bronze" = "brown")) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 14),
+    axis.title = element_text(face = "bold", size = 12),
+    axis.text.x = element_text(face = "bold", size = 8, angle = 35),
+    legend.title = element_text(face = "bold", size = 12, hjust = 0.5),
+    axis.title.x = element_text(vjust = 1, margin = margin(t = -20))
+    # Closes gap between axis title and axis text
+  ) +
+  scale_y_continuous(limits = c(0,25))
+```
+
+
+Clearly, as shown above, the United States dominates when it comes to basketball. We have more gold medals alone than any other country has total medals. 
