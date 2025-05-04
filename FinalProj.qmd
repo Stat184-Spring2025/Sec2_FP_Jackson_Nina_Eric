@@ -12,23 +12,26 @@ format:
     geometry: margin = 1in
     fig-pos: "H"
     appendix: true
+    csl: apa7.csl
 execute:
   echo: true
   warning: false
   message: false
-csl: "/Users/jgasperack/Downloads/GitHubClones/finalProj/Sec2_FP_Jackson_Nina_Eric/apa7.csl"
+bibliography: references.bib
 ---
 
+\newpage
 # Introduction
 
 The Olympics has been the golden standard for athletes of all sports for the last 130 years. To be an Olympic athlete means you must literally be one of the best in the world at your event. The Olympics was very intriguing to us because there is a wide variety of sports and countries and we thought there could be a lot of underlying relationships within the Olympics data over the years.
 
 ![](olympicsParis.png){fig-align="center" width="299"}
+Image found from @parisPicture
 
 ## Primary Dataset
 
 The data set we chose is a very large .csv file that we got from Kaggle. This file has more than 271,000 cases where a case represents an athlete that participated in an event in the given year. The data was recorded from the "First Olympics" in 1896 to the games in Rio de Janeiro in 2016.
-\newline
+
 The person who created the data set goes by the username rgriffin on Kaggle and, according to her Kaggle profile, she is the lead data scientist at Boston Consulting Group X. Most of the data was taken from the website www.sports-reference.com which is a central hub of decades of information about most modern day sports. This includes player statistics, physical attributes, and accolades for most players in any sport within the last 125 years.
 
 The variables in this data set include:\
@@ -51,15 +54,15 @@ The variables in this data set include:\
 ### FAIR/CARE Principles
 
 In terms of the FAIR principles, we believe that this data set embodies each quality. This data set was one of the first ones that appeared when searching up Olympics on Kaggle making it very findable and downloading it was easy, the only struggle was the size of the data set so we made a hugging face link for easier accessibility. Each person in our group has a different machine, yet the data set worked on each one making it interoperable. Despite the size of the file, it was easy to do data analysis and the author even included a detailed report she did herself for reference making this data easily reusable.
-\newline
+
 The CARE principles aren't as clear because their purposes focus more towards the creator of the data set than the actual data set itself. The principle of collective benefit is clear, because there is over 300 different data set notebooks on Kaggle that use this data set. We're not sure whether the creator has more permissions than us as people studying the data set, but she posted her wrangling/scraping code on GitHub and it seems to be read only unless you open the code in your own repository. The only principle that the creator might not have met is responsibility, because there are multiple little inconsistencies in the data set, according to the discussion, without any follow ups from the creator herself. Yet, this data set does seem to be ethical as she cited all of her sources and her code seems pretty unbiased.
 
 ## Secondary Dataset
 
 The other data set we chose also come from Kaggle and it is a .csv file of all the players that were drafted into the NBA from 1950-2018. We needed this data set to compare the names of this draft list of almost 70 years to the list of Olympic athletes. This data set also included .csv files of each player's position info and each player's season performance for a given year and team. Yet, those data sets were unnecessary to include because we only needed the names of the players.
-\newline
+
 The person who created this data set is Omri Goldstein who, according to his LinkedIn found on Kaggle, is a data scientist at Google. All of the data was scraped and wrangled from www.basketball-reference.com which is just a basketball focused version of the previously mentioned "sports-reference".
-\newline
+
 The variables in this data set include:\
 - **ID**: Unique identifier for each player\
 - **Name**: Name of the player\
@@ -72,13 +75,13 @@ The variables in this data set include:\
 ### FAIR/CARE Principles
 
 We believe that this data set also follows the principles of FAIR, as the data set was easily findable on Kaggle when we searched up the phrase NBA. This data was also easily accessible since the data set wasn't particularly large and it easily downloaded onto each group member's machine, making it interoperable. Finally, we thought this data was reusable because the .csv files which includes all player statistics for each season since 1950 has 53 different variables which easily allows for many different conclusions to be drawn.
-\newline
+
 We believe that this data set does not properly follow the principles of CARE. About 100 different data set notebooks were made on Kaggle from this data set and many of the discussion comments share their findings with others, which does follow the collective benefit principle. However, the creator of this data set did not share the code used to scrape and wrangle the data, which we believe is an abuse of authority to control giving the creator too many permissions compared to those studying. However, this creator did take responsibility as he is seen replying to most comments that bring up inconsistencies in the data set. We also believe that he followed the ethics principle as he cited his sources and got his data from an unbiased source.
 
 ## Research Questions
 
 When exploring the data in the data frame we found that the summer and winter Olympics were not always in different year. In fact, they used to be played in the same year up until 1992. We also found that the United States has a lot of gold medalists, and speaking of medalists the youngest one recorded in this data set was just 10 years old! We also saw history in the data by seeing West, East and unified Germany, along with the Soviet Union and Russia being two different country entries as well. These findings in our exploratory data analysis lead to us forming our research questions.
-\newline
+
 **Research Questions**:\
 1. How do various countries' participation in the Olympics change over time?\
 2. How does size (as measured in height and weight) affect the amount of medals that each athlete wins?\
@@ -101,7 +104,6 @@ library(patchwork)
 ```
 
 You might need to install some of these packages if they aren't installed on your current machine already.
-\newpage
 
 ## Load the Data into R
 
@@ -109,16 +111,14 @@ You might need to install some of these packages if they aren't installed on you
 #| label: loadData
 
 ## Olympic Dataset
-url <- "https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina
-/resolve/main/athlete_events.csv"
-# Download file from URL above
-athletes <- read.csv("~/Downloads/athlete_events.csv")
+url <- "https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina/resolve/main/athlete_events.csv"
+
+athletes <- read_csv(url) 
 
 ## NBA Players R Dataset
-file_url <- "https://www.kaggle.com/datasets/drgilermo/
-nba-players-stats?resource=download"
-# Download file from URL above
-nba <- read.csv("~/Downloads/Stat184/Players.csv") # Update path if needed
+url2 <- "https://raw.githubusercontent.com/Stat184-Spring2025/Sec2_FP_Jackson_Nina_Eric/refs/heads/main/Players.csv?token=GHSAT0AAAAAADDG36HRDNLKE3DODHZVMSAU2AX2E4Q"
+
+nba <- read.csv(url2)
 
 ```
 
@@ -126,15 +126,15 @@ In order to download either .csv file, use the links provided to download each d
 
 # The Dominance of the United States
 
-It is no secret that the United States is a heavy favorite to win the Olympic Games in total medal count every year. With fan favorite athletes like Michael Phelps, Simone Biles, and LeBron James, it's hard not to root for them. However, when we thought more about it, we started wondering what the U.S. was doing to be so far ahead of its competition.  
-\newline
-We knew that it wasn't population, even though having more people in your country to choose from definitely helps, we are far better than countries like India and China in terms of total medals won. So, then we thought that size would be a good indicator of an athlete's success. This is where our research question about size predicting medals came from. We also wanted to focus on a singular sport to improve graph readability while also keeping in mind Kosslyn's Principle of Capacity Limitations. In our opinion, the sport where size, in terms of height, matters the most is basketball.  
+It is no secret that the United States is a heavy favorite to win the Olympic Games in total medal count every year. With fan favorite athletes like Michael Phelps, Simone Biles, and LeBron James, it's hard not to root for them. However, when we thought more about it, we started wondering what the U.S. was doing to be so far ahead of its competition.
+
+We knew that it wasn't population, even though having more people in your country to choose from definitely helps, we are far better than countries like India and China in terms of total medals won. So, then we thought that size would be a good indicator of an athlete's success. This is where our research question about size predicting medals came from. We also wanted to focus on a singular sport to improve graph readability while also keeping in mind Kosslyn's Principle of Capacity Limitations. In our opinion, the sport where size, in terms of height, matters the most is basketball.
 
 ## A Race for Second Place
 
 ```{r}
 #| label: athletesBB
-#| include: false
+#| echo: false
 
 ## All BB Athletes
 basketball <- athletes %>%
@@ -153,6 +153,7 @@ basketballFemale <- basketball %>%
 ```{r}
 #| label: countryMedalists
 #| include: false
+#| echo: true
 
 ## Countries who've medaled in basketball
 countryMedalists <- basketball %>%
@@ -185,14 +186,12 @@ medalsPerBBTeam <- countryMedalists %>%
 ```
 
 ```{r}
-#| label: fig-countryBBDataVis
-#| echo: false
-#| fig-cap: "Country Basketball Medalists"
-#| fig-align: center
-#| fig-cap-location: bottom
+#| label: countryBBDataVis
+#| echo: true
+#| include: false
 
 ## Medals for each country
-ggplot(
+medalsBBTeams <- ggplot(
   data = medalsPerBBTeam,
   mapping = aes(x = reorder(`Team`,-Count), y = `Count`, fill = `Medal`)
   # Order the bars by count
@@ -217,11 +216,16 @@ ggplot(
 
 ```
 
+```{r fig-countryBBDataVis, echo=FALSE}
+#| fig-cap: "Country Basketball Medalists"
+#| fig-align: center
+#| fig-cap-location: bottom
+medalsBBTeams
+```
 
-Clearly, as shown above, the United States dominates when it comes to basketball. We have more gold medals alone than any other country has total medals. See @sec-appendix for the wrangling process used to make the data behind the data visualization. Seeing the sizable margin between first and second place made us think that the United States has overall bigger players than other countries. So, we decided to make a data visualization that showed how the height and weight of an athlete affects how many medals they've won. There's always a correlation between height and weight but we were looking for the group with the lowest medal count to be at the bottom of the line and it increases in medal count as the line goes up.
+Clearly, as shown above, the United States dominates when it comes to basketball. We have more gold medals alone than any other country has total medals. See @sec-codeAppend for the wrangling process used to make the data behind the data visualization. Seeing the sizable margin between first and second place made us think that the United States has overall bigger players than other countries. So, we decided to make a data visualization that showed how the height and weight of an athlete affects how many medals they've won. There's always a correlation between height and weight but we were looking for the group with the lowest medal count to be at the bottom of the line and it increases in medal count as the line goes up. So, we used our male and female basketball tables to wrangle medals per athlete and clean the data, which is all shown in @sec-codeAppend2.
 
 ## The Effect of Size
-
 
 ```{r}
 #| label: medalistsBB
@@ -275,16 +279,13 @@ femaleBB_HandW <- basketballMedalsF %>%
 
 ```
 
-
 ```{r}
-#| label: fig-medalistsBBDataVisMale
-#| echo: false
-#| fig-align: center
-#| fig-cap: Male Height vs Weight; Grouped by Medal Count
-#| fig-cap-location: bottom
+#| label: medalistsBBDataVisMale
+#| echo: true
+#| include: false
 
 ## How size affects medals won for athletes
-ggplot(
+maleBB <- ggplot(
   data = maleBB_HandW,
   mapping = aes(
     x = avgHeight,
@@ -293,7 +294,7 @@ ggplot(
     color = total
     )
 ) + 
-  geom_point() +
+  geom_point(alpha = .8) +
   labs(
     title = "How Size Affects the Amount of Medals\na Male Athlete Wins",
     x = "Average Height per Athlete (in)",
@@ -314,14 +315,20 @@ ggplot(
 
 ```
 
-```{r}
-#| label: fig-medalistsBBDataVisFemale
-#| echo: false
+```{r fig-medalistsBBDataVisMale, echo=FALSE}
 #| fig-align: center
-#| fig-cap: Female Height vs Weight; Grouped by Medal Count
-#| fig-cap-location: bottom
+#| fig-cap: "Male Height vs Weight; Grouped by Medal Count"
+#| fig-subcap: "Basketball Athletes Exclusively"
+#| fig-cap-location: top
+maleBB
+```
 
-ggplot(
+```{r}
+#| label: medalistsBBDataVisFemale
+#| echo: true
+#| include: false
+
+femaleBB <- ggplot(
   data = femaleBB_HandW,
   mapping = aes(
     x = avgHeight,
@@ -330,7 +337,7 @@ ggplot(
     color = total
   )
 ) + 
-  geom_point() +
+  geom_point(alpha = .8) +
   labs(
     title = "How Size Affects the Amount of Medals\na Female Athlete Wins",
     x = "Average Height per Athlete (in)",
@@ -349,22 +356,33 @@ ggplot(
     legend.position = "bottom"
   )
 ```
+
+```{r fig-medalistsBBDataVisFemale, echo=FALSE}
+#| fig-align: center
+#| fig-cap: "Female Height vs Weight; Grouped by Medal Count"
+#| fig-subcap: "Basketball Athletes Exclusively"
+#| fig-cap-location: top
+femaleBB
+```
+
 \newpage
 
-Looking at both @fig-medalistsBBDataVisMale and @fig-medalistsBBDataVisFemale, we can see that there is no relationship between an athlete's height and weight and how many medals they won. For example, 7x WNBL all-star and 4x Olympic medalist, Kristi Harrower, is the blue dot near the bottom of the line. When we saw this data visualization, we were stumped because this was one of our main research questions and our findings were not what we expected.  
-\newline
-We came up with some other variables that might be the reasoning behind the United States being an Olympic powerhouse. One we thought of was culture, because basketball is so popular in the U.S. more people are training to be as good as possible from a younger age. This was not consistent however, because the United States is not just good at basketball, they are good at every sport. Then, we thought of resources, like coaching, lifting equipment, and recovery. Note that there may be a relationship between medals won and the amount of resources at the athletes' disposal. Data like that is hard to find though because not every country makes information like that available to the public, but then we thought about the skill of the athletes.  
-\newline
+Looking at both @fig-medalistsBBDataVisMale and @fig-medalistsBBDataVisFemale, we can see that there is no relationship between an athlete's height and weight and how many medals they won. For example, 7x WNBL all-star and 4x Olympic medalist, Kristi Harrower, is the blue dot near the bottom of the line in @fig-medalistsBBDataVisFemale (@kristiH). When we saw this data visualization, we were stumped because this was one of our main research questions and our findings were not what we expected.
+
+We came up with some other variables that might be the reasoning behind the United States being an Olympic powerhouse. One we thought of was culture, because basketball is so popular in the U.S. more people are training to be as good as possible from a younger age. This was not consistent however, because the United States is not just good at basketball, they are good at every sport. Then, we thought of resources, like coaching, lifting equipment, and recovery. Note that there may be a relationship between medals won and the amount of resources at the athletes' disposal. Data like that is hard to find though because not every country makes information like that available to the public, but then we thought about the skill of the athletes.
 
 ## NBA Presence
 
+There is not a single defined metric for determining skill, but we *can* use the world's largest basketball league with the most skilled players in the world as a good determinant of it. Yes, the NBA is majorly an American league, but there are scouts constantly looking for new talent internationally. With names like Luka Doncic, Nikola Jokic, and Victor Wembanyama, the league has become a lot less American-heavy within the past couple decades. Therefore, we used data from the NBA data set we loaded in earlier to match the athletes that have been in both the NBA and the Olympics.
 
-There is not a single defined metric for determining skill, but we *can* use the world's largest basketball league with the most skilled players in the world as a good determinant of it. Yes, the NBA is majorly an American league, but there are scouts constantly looking for new talent. With names like Luka Doncic, Nikola Jokic, and Victor Wembanyama, the league has become a lot less American-heavy within the past couple decades. Therefore, we used data from the NBA data set we loaded in earlier to match the athletes that have been in both the NBA and the Olympics.  
-\newline
-This part of the data wrangling phase was probably the most difficult. The Olympic data set had the names in a format that included the middle names. On the other hand, the NBA names had only first and last names, but some names had an asterisk on the end of them. Then we had to make all the names lower case so the join would match cases correctly. Then, we did the same process to get both the country the athlete participated for and the total number of basketball medals that country won. However, once we had gotten it all wrangled and ready for the data visualization, we made a big finding.
+![](nbaOlympics.png){fig-align="center" width="350"}
+Image found from @nbaPicture
+
+This part of the data wrangling phase was probably the most difficult. The Olympic data set had the names in a format that included the middle names. On the other hand, the NBA names had only first and last names, but some names had an asterisk on the end of them. Then we had to make all the names lower case so the join would match cases correctly. Then, we did the same process to get both the country the athlete participated for and the total number of basketball medals that country won. The entire wrangling process is in @sec-codeAppend3. However, once we had gotten it all wrangled and ready for the data visualization, we made a big finding.\newpage
 
 ```{r}
 #| label: firstLastFunction
+#| echo: true
 #| include: false
 
 ## Function to get only first and last names
@@ -378,6 +396,7 @@ getFirstLast <- function(x) {
 
 ```{r}
 #| label: cleanedNameJoin
+#| echo: true
 #| include: false
 
 ## Olympic Names
@@ -402,6 +421,7 @@ olympicNBA <- inner_join(olympicBBNames, nbaNames,
 
 ```{r}
 #| label: cleanedCountryJoin
+#| echo: true
 #| include: false
 
 ## Joining Countries
@@ -418,6 +438,7 @@ olympicNBACountries <- right_join(olympicNBA, countryNameClean)
 
 ```{r}
 #| label: cleanedMedalsJoin
+#| echo: true
 #| include: false
 
 ## Joining Medals
@@ -436,25 +457,436 @@ nbaPerCountry <- medalsNBACountries %>%
 ```
 
 ```{r}
-#| label: tbl-NBATable
-#| echo: false
-#| tbl-cap-location: top
-#| tbl-cap: "Number of NBA Players that Have Played for Each Country"
+#| label: NBATable
+#| echo: true
+#| include: false
+#| results: asis
 
-nbaPerCountry %>%
-  kable("latex",
+
+nbaTable <- nbaPerCountry %>%
+  knitr::kable("latex",
         col.names = c("Country", "Number of Medals", "Number of NBA Players"),
         booktabs = TRUE,
         escape = FALSE) %>%
   footnote("Players who've played in multiple Olympics are counted once") %>%
-  kable_styling(latex_options = "striped",
-                position = "center") %>%
-  row_spec(0, bold = TRUE, font_size = 12)
+  kable_styling(latex_options = c("striped","scale_down")) %>%
+  row_spec(0, bold = TRUE, font_size = 10)
 
 ```
+
+```{r tbl-NBATable, echo=FALSE}
+#| fig-pos: 'H'
+#| tbl-cap-location: top
+#| tbl-cap: "Number of NBA Players that Have Played for Each Team"
+nbaTable
+```
+
+We found that the amount of NBA players that have played for the United States is much larger than any other country. While there is not a consistent relationship for the two variables, the country with a large lead in medals also has a large lead in talented players. It is important to note that all athletes in the Olympic Games are skilled because they are among the best players in their country at their sport. The data suggests however, that the United States has the most skilled of those skilled players at their disposal due of the NBA.
+
+This was a great finding for our team because at first we weren't sure if we would be able to continue with the research question. Yet, this only shows why the United States is dominant at basketball, but we want to show why the United States is dominant at all sports. As previously stated though, there is not a single defined metric for determining skill, which made this next section very tricky.
+
 \newpage
 
+## Winning World Wide
+
+Since there is no defined measurement for skill, that means we would have had to search up a data set every sports' professional league and compare it to our Olympic data set for over 60 sports. That would have taken way too long for the time that we had, so we decided to go another route. We thought that if we could get the point across that medal count ***is not*** determined by the athletes' size then we could infer that it must be from another variable. Then, since we proved that the other variable happened to be a skill gap in basketball we can assume that the United States has more skillful athletes overall. It is important to note however, that the skill gap may not be the only variable which makes the United States win medals more than other countries. We stated earlier that the resources at the athletes' disposal could be a confounding variable, along with the privilege of the United States. Of course, the U.S. has its areas that struggle financially, but being a first world country allows more people to focus on things like sports rather than trying to afford food or shelter.
+
+```{r}
+#| label: teamEventWrangling
+#| include: false
+#| echo: true
+
+## Unique events
+events <- athletes %>%
+  select(Sport, Event) %>%
+  distinct(Sport,Event) %>%
+  select(-c("Sport")) %>% arrange(Event)
+
+## Team Event Indicators
+teamEvents <- c(
+  "Team","Volleyball","Bobsleigh","Doubles","Baseball",
+  "Fours","Relay","Basketball","Tandem","Pairs",
+  "Handball","Hockey","Lacrosse","Polo","Group",
+  "17-man","6-man","Eights","Quadruple","Rugby",
+  "Two Person","Three Person","Softball","Tug-Of-War", "Football"
+)
+
+athletes <- athletes %>%
+  mutate(
+    isTeamEvent = str_detect(Event, str_c(teamEvents, collapse = "|"))
+  )
+
+```
+
+```{r}
+#| label: oneMedalPerTeam
+#| include: false
+#| echo: true
+
+## Making team sports have one combined medal
+teamMedals <- athletes %>%
+  filter(isTeamEvent, !is.na(Medal)) %>%
+  distinct(Team, Games, Event, Medal)
+
+indivMedals <- athletes %>%
+  filter(!isTeamEvent, !is.na(Medal)) %>%
+  distinct(Team, Games, Event, Medal)
+
+## Combining team medals and individual medals
+all_medals = bind_rows(teamMedals, indivMedals) %>%
+  mutate(Team = str_replace_all(Team,"\\-1$","")) %>%  # Removing odd endings to
+  mutate(Team = str_replace_all(Team,"\\-2$","")) %>%  # country names
+  mutate(Team = str_replace_all(Team,"\\-3$","")) %>%
+  mutate(Team = str_replace_all(Team,"\\-4$","")) %>%
+  mutate(Team = str_replace_all(Team,"\\-15$","")) 
+
+```
+
+```{r}
+#| label: totalMedalsPerCountry
+#| include: false
+#| echo: true
+
+## Medal counts
+medalCountries <- all_medals %>%
+  group_by(Team, Medal) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  pivot_wider(
+    names_from = Medal,
+    values_from = count,
+    values_fill = 0
+  ) %>%
+  mutate(total = Bronze + Gold + Silver)
+
+```
+
+```{r}
+#| label: totalMedalsClean
+#| include: false
+#| echo: true
+
+## Case is now Team and Medal type for Data Vis.
+medalsPerTeam <- all_medals %>%
+  group_by(Team) %>%
+  summarise(
+    goldWon = sum(`Medal` == "Gold", na.rm = TRUE),
+    silverWon = sum(`Medal` == "Silver", na.rm = TRUE),
+    bronzeWon = sum(`Medal` == "Bronze", na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  pivot_longer(cols = c(goldWon, silverWon, bronzeWon),
+               names_to = "Medal",
+               values_to = "Count") %>%
+  mutate(`Medal` = case_when(
+    Medal == "goldWon" ~ "Gold", # Changing names of variables to medals
+    Medal == "silverWon" ~ "Silver",
+    Medal == "bronzeWon" ~ "Bronze"
+  )) %>%
+  mutate(Medal = factor(Medal, levels = c("Gold","Silver","Bronze"))) %>%
+  group_by(Team) %>%
+  mutate(total = sum(Count, na.rm = TRUE)) %>%
+  ungroup() %>%
+  arrange(desc(total)) %>%
+  slice_head(n=30) # Top 10 teams (need 30, three medal types per country)
+
+```
+
+```{r}
+#| label: totalMedalsDataVis
+#| echo: true
+#| include: false
+
+## Medal Vis.
+allSportsMedals <- ggplot(
+  medalsPerTeam,
+  mapping = aes(
+    x = reorder(Team, -total),
+    y = Count,
+    fill = Medal
+  )
+) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(
+    title = "Frequency of Medals Won by Country",
+    x = "Country",
+    y = "Medals Won"
+  ) +
+  scale_fill_manual(values = c("Gold" = "gold","Silver" = "gray",
+                               "Bronze" = "brown")) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 10),
+    axis.title = element_text(face = "bold", size = 8),
+    axis.text.x = element_text(face = "bold", size = 6, angle = 35),
+    legend.title = element_text(face = "bold", size = 8, hjust = 0.5)
+  )
+
+```
+
+```{r fig-totalMedalsDataVis, echo=FALSE}
+#| fig-align: center
+#| fig-cap: "Medals Won by Each of the Top 10 Medal Winners"
+#| fig-cap-location: bottom
+allSportsMedals
+```
+
+This visual really put it into perspective how dominant the United States is in the Olympic Games. This graph is slightly outdated but the gap has only widened since 2016 with the U.S. now having over 3000 total medals. The Soviet Union does not exist and has not since 1992 and they are still in second place, which honestly is very impressive. However, that means the United States almost has three times the amount of medals that the country in second place does, as of 2025 (@medalByCountry).
+
+This visualization's data was hard to wrangle because we had to make sure team sports counted once towards a country's medal count. So, we made a table of all 700+ distinct events and looked for all keywords that indicated a team event. Then, we counted all individual event medals and team event medals separately and combined them to get the countries full medal count. Some countries also had duplicate entries odd endings and we had to remove the odd endings so all the duplicates would form one. The rest of the wrangling had relatively the same process as @fig-countryBBDataVis, and can be seen in @sec-codeAppend4.
+
+The fact the United States has this far of a gap between them and second place indicates that there *must* be a variable that separates the United States' athletes from all of the other countries' athletes. Since we proved that size does not indicate an athlete's success in terms of medals won with basketball we decided to do the same with all sports. So, we did the same data wrangling process as the data behind @fig-medalistsBBDataVisMale and @fig-medalistsBBDataVisFemale which can be seen in @sec-codeAppend5. The only difference is that this data set takes a random sample of 500 athletes from any sport.
+
+```{r}
+#| label: allMedalistsClean
+#| include: false
+#| echo: true
+
+## Sample 500 random male athletes size and medal count for data vis.
+heightWeightSampleM <- athletes %>%
+  filter(Sex == "M") %>%
+  group_by(ID, Name) %>%
+  summarise(
+    avgHeight = mean(Height, na.rm = TRUE),
+    avgWeight = mean(Weight, na.rm = TRUE),
+    goldWon = sum(`Medal` == "Gold", na.rm = TRUE),
+    silverWon = sum(`Medal` == "Silver", na.rm = TRUE),
+    bronzeWon = sum(`Medal` == "Bronze", na.rm = TRUE),
+    total = sum(!is.na(`Medal`)),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(avgHeight)) %>% filter(!is.na(avgWeight)) %>%
+  filter(total > 0) %>%
+  slice_sample(n = 500) %>%
+  mutate(avgHeight_IN = avgHeight/2.34,
+         avgWeight_LB = avgWeight*2.2)
+
+## Sample 500 females
+heightWeightSampleF <- athletes %>%
+  filter(Sex == "F") %>%
+  group_by(ID, Name) %>%
+  summarise(
+    avgHeight = mean(Height, na.rm = TRUE),
+    avgWeight = mean(Weight, na.rm = TRUE),
+    goldWon = sum(`Medal` == "Gold", na.rm = TRUE),
+    silverWon = sum(`Medal` == "Silver", na.rm = TRUE),
+    bronzeWon = sum(`Medal` == "Bronze", na.rm = TRUE),
+    total = sum(!is.na(`Medal`)),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(avgHeight)) %>% filter(!is.na(avgWeight)) %>%
+  filter(total > 0) %>%
+  slice_sample(n = 500) %>%
+  mutate(avgHeight_IN = avgHeight/2.34,
+         avgWeight_LB = avgWeight*2.2)
+
+```
+
+```{r}
+#| label: allMedalistsDataVisM
+#| echo: true
+#| include: false
+
+## Show athlete size isn't why the US wins so much
+maleALL <- ggplot(
+  heightWeightSampleM,
+  mapping = aes(
+    x = avgHeight_IN,
+    y = avgWeight_LB,
+    size = total,
+    color = total
+  )
+) + geom_point() +
+  labs(
+    title = "How Size Affects the Amount of Medals\na Male Athlete Wins",
+    x = "Average Height per Athlete (in)",
+    y = "Average Weight per Athlete (lbs)",
+    size = "Number of Medals Won",
+    color = "Number of Medals Won"
+  ) + 
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 10),
+    axis.title = element_text(face = "bold", size = 8),
+    axis.text.x = element_text(face = "bold", size = 6, angle = 35),
+    axis.text.y = element_text(face = "bold"),
+    legend.title = element_text(face = "bold", size = 6, hjust = 0.5),
+    legend.position = "bottom",
+    legend.box = "vertical"
+  ) +
+  guides(color = guide_legend(title = "Number of Medals Won"),
+         size = guide_legend(title = "Number of Medals Won")) +
+  scale_color_gradient(low = "lightgreen", high = "darkgreen", 
+                       breaks = c(min(heightWeightSampleM$total),
+    (max(heightWeightSampleM$total)+min(heightWeightSampleM$total))/2,
+                                  max(heightWeightSampleM$total))) + 
+  scale_size_continuous(breaks = c(min(heightWeightSampleM$total),
+    (max(heightWeightSampleM$total)+min(heightWeightSampleM$total))/2,
+                                   max(heightWeightSampleM$total)))
+
+
+```
+
+```{r fig-allMedalistsDataVisM, echo=FALSE}
+#| fig-align: center
+#| fig-cap-location: top
+#| fig-cap: "Male Height and Weight; Grouped by Medal Count"
+maleALL
+```
+
+```{r}
+#| label: allMedalistsDataVisF
+#| echo: true
+#| include: false
+
+femaleALL <- ggplot(
+  heightWeightSampleF,
+  mapping = aes(
+    x = avgHeight_IN,
+    y = avgWeight_LB,
+    size = total,
+    color = total
+  )
+) + geom_point() +
+  labs(
+    title = "How Size Affects the Amount of Medals\na Female Athlete Wins",
+    x = "Average Height per Athlete (in)",
+    y = "Average Weight per Athlete (lbs)",
+    size = "Number of Medals Won",
+    color = "Number of Medals Won"
+  ) + 
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 10),
+    axis.title = element_text(face = "bold", size = 8),
+    axis.text.x = element_text(face = "bold", size = 6, angle = 35),
+    axis.text.y = element_text(face = "bold"),
+    legend.title = element_text(face = "bold", size = 6, hjust = 0.5),
+    legend.position = "bottom",
+    legend.box = "vertical") +
+  guides(color = guide_legend(title = "Number of Medals Won"),
+         size = guide_legend(title = "Number of Medals Won")) +
+  scale_color_gradient(low = "lightpink", high = "darkred", 
+                       breaks = c(min(heightWeightSampleF$total),
+    (max(heightWeightSampleF$total)+min(heightWeightSampleF$total))/2,
+                                  max(heightWeightSampleF$total))) + 
+  scale_size_continuous(breaks = c(min(heightWeightSampleF$total),
+    (max(heightWeightSampleF$total)+min(heightWeightSampleF$total))/2,
+                                   max(heightWeightSampleF$total)))
+
+```
+
+```{r fig-allMedalistsDataVisF, echo=FALSE}
+#| fig-align: center
+#| fig-cap-location: top
+#| fig-cap: "Female Height and Weight; Grouped by Medal Count"
+femaleALL
+```
+
+We actually cannot write a pre-written narrative text describing this data visualization because it changes with every render because it randomly samples 500 athletes from all sports each time. Sometimes it will show a relationship between size, in height and weight, and medal count, but in most cases it will show a plot with a positive correlation where dot size does not increase with it. Usually, dots of different sizes will be scattered all around the trend line. It is important to note that the legend is a scale from the left color to the right color with the minimum, midpoint, and maximum being the legend values.
+
+This inconsistency in the different graphs' relationships allows us to rule out the graphs that have relationships as outliers. Since most of the time no relationship is shown we can assume that there is no relationship between an athlete's size and their medal count, regardless of the sports. Since neither population nor size are the variable that is the recipe for the United States' success, there must be another variable or combination of variables making the U.S. so dominant.
+
+## Analysis
+
+We narrowed that the United States has several key variables that might be in their favor including:
+
+-   *Skill*: The U.S. athletes' are on average more skilled than other countries' athletes.
+
+-   *Diversity*: Having many different groups of people with different skill sets living in the same country definitely increases the number of people to choose from.
+
+-   *Privilege*: With the U.S. being a first world country a majority of children can put their focuses into sports without having to worry about what they are going to eat or where they are going to sleep. While, unfortunately, there are also children that live that way in the U.S., there are more children that live without worrying about that.
+
+-   *Resources*: The United States' athletes might have more and/or better resources than other countries because of the funding that sponsors and fundraisers bring to the team.
+
+## Conclusion
+
+Through this analysis, we have a conclusion about what the United States has that separates them from the competition. We can not definitively say whether diversity plays a role in the States' Olympic success. We would have to find data for the diversity rating of each country and then compare that to the diversity of the entire Olympic team of each year to see if diversity increases medal count, which we did not have the time for. We also cannot say that having more resources causes the U.S. to win more medals because it's hard to keep track of something as broad as that. It would involve multiple data sets and a lot of missing information since not every country publishes data like that. We also cannot prove that privilege plays an effect because, while first, second, and third world is a good broad term, it is not a good indicator for the privilege of the children in the country. Poverty rates would not work either because just because a child is not impoverished does not mean that they are privileged. So, it would be hard to know what to use as an indicator of "being privileged".
+
+Therefore, that leaves us with one variable. With our analysis, the only variable where we can state that a relationship exists is the skill of the athletes. While the others could play a role in the amount of medals the U.S. wins, the only relationship that was presented in our data is that the gap in medals between the U.S. and the rest of the world is due to the gap in skill between U.S. athletes and other countries' athletes. This does not mean that every U.S. athlete is better than every other athlete in the world. Our data is just suggesting that the United States produces more skilled Olympic athletes compared to other countries.
+
+\newpage
 # Code Appendix {#sec-appendix}
 
-```{r codeAppend, ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+## Wrangling 
+
+### Basketball Medals Per Country {#sec-codeAppend}
+```{r, ref.label= c("athletesBB", "countryMedalists")}
+#| label: codeAppend
+#| echo: true
+#| eval: false
 ```
+
+### Basketball Medals Per Player {#sec-codeAppend2}
+```{r, ref.label= c("medalistsBB", "medalistsBBClean")}
+#| label: codeAppend2
+#| echo: true
+#| eval: false
+```
+
+### Joining NBA and Olympic Datasets {#sec-codeAppend3}
+```{r, ref.label= c("firstLastFunction", "cleanedNameJoin","cleanedCountryJoin","cleanedMedalsJoin")}
+#| label: codeAppend3
+#| echo: true
+#| eval: false
+```
+
+### Total Medals Per Country {#sec-codeAppend4}
+```{r, ref.label= c("teamEventWrangling", "oneMedalPerTeam","totalMedalsPerCountry","totalMedalsClean")}
+#| label: codeAppend4
+#| echo: true
+#| eval: false
+```
+
+### Total Medals Per Athlete {#sec-codeAppend5}
+```{r, ref.label= c("allMedalistsClean")}
+#| label: codeAppend5
+#| echo: true
+#| eval: false
+```
+
+## Data Visualizations
+
+### All Medal Winners for Basketball {#sec-codeAppend6}
+```{r, ref.label= c("countryBBDataVis")}
+#| label: codeAppend6
+#| echo: true
+#| eval: false
+```
+
+### How Height and Weight Affect Basketball Medal Winners {#sec-codeAppend7}
+```{r, ref.label= c("medalistsBBDataVisMale", "medalistsBBDataVisFemale")}
+#| label: codeAppend7
+#| echo: true
+#| eval: false
+```
+
+### NBA Players in the Olympics {#sec-codeAppend8}
+```{r, ref.label= c("NBATable")}
+#| label: codeAppend8
+#| echo: true
+#| eval: false
+```
+
+### Top 10 Medal Winners {#sec-codeAppend9}
+```{r, ref.label= c("totalMedalsDataVis")}
+#| label: codeAppend9
+#| echo: true
+#| eval: false
+```
+
+### How Height and Weight Affect Olympic Medal Winners {#sec-codeAppend10}
+```{r, ref.label= c("allMedalistsDataVisM", "allMedalistsDataVisF")}
+#| label: codeAppend10
+#| echo: true
+#| eval: false
+```
+
+\newpage
+# References
+
+```{r, include=FALSE}
+#| label: references
+#| bibliography: ~/Downloads/refernces.bib
+#| csl: ~/Downloads/apa7.csl
+```
+
