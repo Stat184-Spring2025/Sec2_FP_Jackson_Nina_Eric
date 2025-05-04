@@ -116,7 +116,11 @@ url <- "https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina/re
 athletes <- read_csv(url) 
 
 ## NBA Players R Dataset
+<<<<<<< Updated upstream
 url2 <- "https://raw.githubusercontent.com/Stat184-Spring2025/Sec2_FP_Jackson_Nina_Eric/refs/heads/main/Players.csv?token=GHSAT0AAAAAADDG36HRDNLKE3DODHZVMSAU2AX2E4Q"
+=======
+url2 <- "https://gist.githubusercontent.com/jgasperackpsu/2c926a834c47eb5fc78d0626e7ff05bb/raw/140c327396394e8528acb4caaaf3d34d3a500fe5/Players.csv"
+>>>>>>> Stashed changes
 
 nba <- read.csv(url2)
 
