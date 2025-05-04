@@ -26,5 +26,7 @@ NBA Players: https://www.kaggle.com/datasets/drgilermo/nba-players-stats?resourc
 
 ## Authors
 
-Nina Mesyngier - Applied Data Science student at Penn State University - Contact: nvm5600@psu.edu - LinkedIN: https://www.linkedin.com/in/ninamesyngier
+Nina Mesyngier - Applied Data Science student at Penn State University - Contact: nvm5600@psu.edu - LinkedIN: https://www.linkedin.com/in/ninamesyngier  
+Jackson Gasperack - Computational Data Science Undergrad at Penn State University -
+Contact: jpg6383@psu.edu - LinkedIn: https://www.linkedin.com/in/jackson-gasperack/   
 Give information about who are the authors of the project and how people can get in touch if they have questions.
