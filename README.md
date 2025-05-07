@@ -41,4 +41,4 @@ More information and other references found at the bottom References section in 
 
 Nina Mesyngier - Applied Data Science student at Penn State University - Contact: nvm5600@psu.edu - LinkedIN: https://www.linkedin.com/in/ninamesyngier  
 Jackson Gasperack - Computational Data Science Undergrad at Penn State University - Contact: jpg6383@psu.edu - LinkedIn: https://www.linkedin.com/in/jackson-gasperack/   
-Eric Farrall - Contact: ebf5252@psu.edu
+Eric Farrall - Statistical Modeling Data Science Major and Applied Statistics Major, Chinese Minor at Penn State University - Contact: ebf5252@psu.edu - LinkedIn: https://www.linkedin.com/in/eric-farrall/
