@@ -10,7 +10,9 @@ We decided to focus more on quantifiable data, such as Age, Height, and Weight, 
 
 ### Interesting Insight
 
-This is optional but highly recommended. You'll include one interesting insight from your project as part of the README. This insight is most effective when you include a visual. Keep in mind that this visual must be included as an image file (e.g., JPG, PNG, etc.). You can export plots created with `{ggplot2}` by using the function `ggsave`.
+![](medalsPerCountry.png){fig-aling="center",width="300"}
+
+The image shown above is how many medals the top ten medal getters of Olympic history have. This displays how much the United States has dominated over the last 120 years. It is also important to note that, as of today, the Soviet Union is still in second place while the United States has participated in the four Olympics not included in this data set. This means that the gap between United States and second place is continuing to widen which each Olympic games.
 
 ## Repo Structure
 
@@ -21,6 +23,7 @@ This is optional but highly recommended. You'll include one interesting insight 
 - **Project_Guidelines.md**: The rubric/outline we used to make our qmd file.
 - **README.md**: Description of the repository.
 - **.gitignore**: Ignored changes.
+- **medalsPerCountry.png**: Image of one of our data visualizations.
 
 ## Data Sources and Acknowledgements
 
