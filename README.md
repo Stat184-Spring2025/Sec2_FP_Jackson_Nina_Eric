@@ -40,6 +40,5 @@ More information and other references found at the bottom References section in 
 ## Authors
 
 Nina Mesyngier - Applied Data Science student at Penn State University - Contact: nvm5600@psu.edu - LinkedIN: https://www.linkedin.com/in/ninamesyngier  
-Jackson Gasperack - Computational Data Science Undergrad at Penn State University -
-Contact: jpg6383@psu.edu - LinkedIn: https://www.linkedin.com/in/jackson-gasperack/   
-Give information about who are the authors of the project and how people can get in touch if they have questions.
+Jackson Gasperack - Computational Data Science Undergrad at Penn State University - Contact: jpg6383@psu.edu - LinkedIn: https://www.linkedin.com/in/jackson-gasperack/   
+Eric Farrall - Contact: ebf5252@psu.edu
