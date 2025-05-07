@@ -14,15 +14,22 @@ This is optional but highly recommended. You'll include one interesting insight 
 
 ## Repo Structure
 
-Use this section to explain the structure of your repo. This should help visitors quickly figure out where they should look to find certain elements. Further, you can use this space to highlight and briefly explain important/key files in the repo.
+- **FinalProj.qmd**: This was the template of the qmd file that we all added to in our own branches.
+- **FinalProjMERGED.qmd**: This is the final qmd file of all of our work.
+- **MLA9.csl** & **apa7.csl**: Two csl formats provided in the template (we chose apa7.csl).
+- **references.bib**: Bib file for our references.
+- **Project_Guidelines.md**: The rubric/outline we used to make our qmd file.
+- **README.md**: Description of the repository.
+- **.gitignore**: Ignored changes.
 
 ## Data Sources and Acknowledgements
 
-Be sure to list where you got any data used within the project. Be sure to acknowledge any one whose work or elements you're drawing upon.
 Main data is contained here: https://huggingface.co/datasets/EFarrallpsu/STAT184_Eric_Jackson_Nina/tree/main
 taken from: https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results
 
 NBA Players: https://www.kaggle.com/datasets/drgilermo/nba-players-stats?resource=download
+
+More information and other references found at the bottom References section in our pdf render.
 
 ## Authors
 
