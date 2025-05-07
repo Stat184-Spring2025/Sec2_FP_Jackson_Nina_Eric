@@ -16,14 +16,17 @@ The image shown above is how many medals the top ten medal getters of Olympic hi
 
 ## Repo Structure
 
-- **FinalProj.qmd**: This was the template of the qmd file that we all added to in our own branches.
-- **FinalProjMERGED.qmd**: This is the final qmd file of all of our work.
+- **FinalProj.qmd**: This was the template of the QMD file that we all added to in our own branches.
+- **FinalProjMERGED.qmd**: This is the final QMD file of all of our work.
 - **MLA9.csl** & **apa7.csl**: Two csl formats provided in the template (we chose apa7.csl).
 - **references.bib**: Bib file for our references.
-- **Project_Guidelines.md**: The rubric/outline we used to make our qmd file.
+- **Project_Guidelines.md**: The rubric/outline we used to make our QMD file.
 - **README.md**: Description of the repository.
 - **.gitignore**: Ignored changes.
 - **medalsPerCountry.png**: Image of one of our data visualizations.
+- **olympicsParis.png**: Picture used in QMD file.
+- **nbaOlympics.png**: Picture used in QMD file.
+- **finalProjMERGED.pdf**: PDF render of the QMD file
 
 ## Data Sources and Acknowledgements
 
