@@ -14,7 +14,7 @@ We decided to focus more on quantifiable data, such as Age, Height, and Weight, 
 
 The image shown above is how many medals the top ten medal getters of Olympic history have. This displays how much the United States has dominated over the last 120 years. It is also important to note that, as of today, the Soviet Union is still in second place while the United States has participated in the four Olympics not included in this data set. This means that the gap between United States and second place is continuing to widen which each Olympic games.
 
-## Repo Structure
+## Repo Structure 
 
 - **FinalProj.qmd**: This was the template of the QMD file that we all added to in our own branches.
 - **FinalProjMERGED.qmd**: This is the final QMD file of all of our work.
